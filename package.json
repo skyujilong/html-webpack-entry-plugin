@@ -1,0 +1,23 @@
+{
+  "name": "html-webpack-entry-plugin",
+  "version": "0.0.1",
+  "description": "a plugin for html-webpack-plugin to mange your entry!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skyujilong/html-webpack-entry-plugin.git"
+  },
+  "keywords": [
+    "html-webpack-entry-plugin",
+    "webpack4-plugin"
+  ],
+  "author": "jilong5",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skyujilong/html-webpack-entry-plugin/issues"
+  },
+  "homepage": "https://github.com/skyujilong/html-webpack-entry-plugin#readme"
+}
