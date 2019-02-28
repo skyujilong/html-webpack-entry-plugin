@@ -10,15 +10,13 @@ class HtmlWebpackEntryPlugin{
                 debugger;
                 // 获取入口名字
                 let entryName = this.getEntryName(data);
-                let { entrypoints } = compilation;
-                for(let item of entrypoints){
+
+                for (let item of compilation.entrypoints){
                     // key值为入口名字，entryPoint中，含有整个html中需要的js文件。
-                    let[key,entryPoint] = item;
+                    let key = item[0],
+                        entryPoint = item[1];
                     if(key === entryName){
-                        let {
-                            chunks
-                        } = entryPoint;
-                        data.assetTags.scripts = this.getAssetTagsScripts(chunks, data.assetTags.scripts);
+                        data.assetTags.scripts = this.getAssetTagsScripts(entryPoint.chunks, data.assetTags.scripts);
                         break;
                     }
                 }
