@@ -1,13 +1,13 @@
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 class HtmlWebpackEntryPlugin{
-    // constructor(option){
-
-    // }
+    constructor(){
+        this.pluginName = 'html-webpack-entry-plugin';
+    }
     apply(compiler){
-        compiler.hooks.compilation.tap('HtmlAssetsPlugin', (compilation) => {
+        compiler.hooks.compilation.tap(this.pluginName, (compilation) => {
             HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync('beforeAssetTagGeneration', (data, cb) => {
+                debugger;
                 // 获取入口名字
                 let entryName = this.getEntryName(data);
                 let { entrypoints } = compilation;
