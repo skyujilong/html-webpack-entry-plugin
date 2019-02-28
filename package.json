@@ -14,10 +14,20 @@
     "html-webpack-entry-plugin",
     "webpack4-plugin"
   ],
-  "author": "jilong5",
+  "author": "Jilong Yu",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/skyujilong/html-webpack-entry-plugin/issues"
   },
-  "homepage": "https://github.com/skyujilong/html-webpack-entry-plugin#readme"
+  "homepage": "https://github.com/skyujilong/html-webpack-entry-plugin#readme",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "peerDependencies": {
+    "webpack": "^4.0.0",
+    "html-webpack-plugin": "^4.0.0-beta.5"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^4.0.0-beta.5"
+  }
 }
