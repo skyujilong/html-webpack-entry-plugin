@@ -1,17 +1,26 @@
 # html-webpack-entry-plugin
+
 A html-webpack-plugin component that supports multiple entrypoint resource file splits.
 
 一个html-webpack-plugin的组件，支持多entrypoint的资源文件拆分。
 
 ## Installation
 
+```
 npm i html-webpack-entry-plugin
+```
 
+``` 
 yarn add html-webpack-entry-plugin
+```
 
-## Environmental needs
-webpack4 & html-webpack-plugin@next
+## Dependencies
 
+webpack >= 4.0.0 
+
+html-webpack-plugin >= 4.0.0
+
+node >= 6.0.0
 
 ## Example Webpack Config
 
@@ -71,24 +80,24 @@ webpack config
         next:"./next.js",
         other:"./other.js"
     },
-    plugins:{
+    plugins:[
         new HtmlWebpackPlugin({
             minify:false,
             template: "filePath",
-            filename: 'index.html'//this filename need same as entrypoint
+            filename: 'index.html'//this filename need same as entrypoint 这里要求filename与entry中定义的名字相同
         }),
         new HtmlWebpackPlugin({
             minify:false,
             template: "filePath",
-            filename: 'next.html'//this filename need same as entrypoint
+            filename: 'next.html'//this filename need same as entrypoint 这里要求filename与entry中定义的名字相同
         }),
         new HtmlWebpackPlugin({
             minify:false,
             template: "filePath",
-            filename: 'other.html'//this filename need same as entrypoint
+            filename: 'other.html'//this filename need same as entrypoint 这里要求filename与entry中定义的名字相同
         }),
         new HtmlWebpackEntryPlugin()
-    }
+    ]
 }    
 
 ```
@@ -177,4 +186,24 @@ output:
 
 the index.js and next.js all include the same moudule. 
 
-but other not, so it not have vendors.js
+but other.js not, so it not have vendors.js
+
+
+在index.js与next.js中引用了相同的模块，公共的模块会抽取到vendors.js中。而other.js没有引用相同的模块。
+
+所以index.html以及next.html中都有vendors.js的引用，但是到了other.html中，没有这个模块。
+
+## Usage
+
+```javascirpt
+    {
+        plugins:[
+            new HtmlWebpackEntryPlugin()
+        ]
+    }
+
+```
+
+## TODO
+
+suport meta tags 
