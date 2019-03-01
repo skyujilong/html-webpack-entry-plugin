@@ -7,8 +7,7 @@ class HtmlWebpackEntryPlugin {
     apply(compiler) {
         compiler.hooks.compilation.tap(this.pluginName, (compilation) => {
             HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync('beforeAssetTagGeneration', (data, cb) => {
-                //TODO: 有个link css 也发生了同样的问题！ 我日哦！！！还的修改
-                debugger;
+                // debugger;
                 // 获取入口名字
                 let entryName = this.getEntryName(data);
 
@@ -17,7 +16,9 @@ class HtmlWebpackEntryPlugin {
                     let key = item[0],
                         entryPoint = item[1];
                     if (key === entryName) {
-                        data.assetTags.scripts = this.getAssetTagsScripts(entryPoint.chunks, data.assetTags.scripts);
+                        let renderResource = this.getAssetTagsScriptsAndStyles(entryPoint.chunks, data);
+                        data.assetTags.scripts = renderResource[0];
+                        data.assetTags.styles = renderResource[1];
                         break;
                     }
                 }
@@ -31,24 +32,31 @@ class HtmlWebpackEntryPlugin {
     }
     /**
      * 获取该htmlwepbackplugin实例对应的入口js文件。
-     * @param {*} compilation webpack编辑环境
      * @param {*} entryChunkList 入口的文件
-     * @param {*} assetTagsScripts 所有的文件
+     * @param {*} data html webpack 实力，要渲染的资源
      */
-    getAssetTagsScripts(entryChunkList, assetTagsScripts) {
+    getAssetTagsScriptsAndStyles(entryChunkList, data) {
         // mode中的值 production 生产环境
         // let mode = compilation.options.mode;
+        let assetTagsScripts = data.assetTags.scripts;
+        let assetTagsStyles = data.assetTags.styles;
+        let resourceList = assetTagsScripts.concat(assetTagsStyles);
         let renderJsList = [];
+        let renderCssList = [];
         entryChunkList.forEach(chunk => {
-            chunk.files.forEach(renderJsName => {
-                assetTagsScripts.forEach(htmlScript => {
-                    if (htmlScript.attributes.src.indexOf(renderJsName) != -1) {
-                        renderJsList.push(htmlScript);
+            chunk.files.forEach(fileName => {
+                resourceList.forEach(resource => {
+
+                    if (resource.tagName === 'script' && resource.attributes.src.indexOf(fileName) != -1) {
+                        renderJsList.push(resource);
+                    } else if (resource.tagName === 'link' && resource.attributes.href.indexOf(fileName) != -1) {
+                        renderCssList.push(resource);
                     }
+
                 });
             })
         });
-        return renderJsList;
+        return [renderJsList, renderCssList];
     }
 }
 
