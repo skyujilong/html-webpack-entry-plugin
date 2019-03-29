@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 class HtmlWebpackEntryPlugin {
     constructor() {
@@ -27,7 +28,7 @@ class HtmlWebpackEntryPlugin {
         });
     }
     getEntryName(data) {
-        let entryName = data.plugin.options.filename.split('.')[0];
+        let entryName = path.basename(data.plugin.options.filename).split('.')[0];
         return entryName;
     }
     /**
