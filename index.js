@@ -28,7 +28,7 @@ class HtmlWebpackEntryPlugin {
         });
     }
     getEntryName(data) {
-        let entryName = data.plugin.options.entryName || path.basename(data.plugin.options.filename).split('.')[0];
+        let entryName = path.basename(data.plugin.options.filename).split('.')[0];
         return entryName;
     }
     /**
