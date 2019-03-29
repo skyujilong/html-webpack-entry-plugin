@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-entry-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a plugin for html-webpack-plugin to mange your entry!",
   "main": "index.js",
   "scripts": {
